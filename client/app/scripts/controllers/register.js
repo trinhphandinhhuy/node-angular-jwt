@@ -2,7 +2,7 @@
 
 
 angular.module('jwtPluralsightApp')
-  .controller('RegisterCtrl', function ($http, $rootScope, alert) {
+  .controller('RegisterCtrl', function ($http, $rootScope, alert, authToken) {
     var vm = this;
     vm.submit = function () {
       var url = 'http://localhost:3000/register';
@@ -12,7 +12,8 @@ angular.module('jwtPluralsightApp')
       };
       $http.post(url, user)
         .success(function (res) { 
-          alert('success', 'OK!', 'You are now register!');
+          alert('success', 'Account Created', 'Welcome, ' + res.user.email + '!');
+          authToken.setToken(res.token)
         })
         .error(function (err) {
           alert('warning', 'Opps', 'Could not register');
