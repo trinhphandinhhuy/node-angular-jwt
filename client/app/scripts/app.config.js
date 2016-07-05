@@ -23,6 +23,12 @@ angular.module('jwtPluralsightApp')
             templateUrl: '/views/jobs.html',
             controller: 'JobsCtrl',
             controllerAs: 'Jobs'
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: '/views/login.html',
+            controller: 'LoginCtrl',
+            controllerAs: 'Login'
         });
         $httpProvider.interceptors.push('authInterceptor'); 
     })

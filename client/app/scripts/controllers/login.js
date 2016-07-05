@@ -1,18 +1,17 @@
 'use strict';
 
-
 angular.module('jwtPluralsightApp')
-  .controller('RegisterCtrl', function ($http, $rootScope, alert, authToken, API_URL) {
+  .controller('LoginCtrl', function ($http, API_URL, alert, authToken) {
     var vm = this;
     vm.submit = function () {
-      var url = API_URL + 'register';
+      var url = API_URL + 'login';
       var user = {
         email: vm.email,
         password: vm.password
       };
       $http.post(url, user)
         .success(function (res) { 
-          alert('success', 'Account Created', 'Welcome, ' + res.user.email + '!');
+          alert('success', 'Welcome', 'Thanks for coming back ' + res.user.email + '!');
           authToken.setToken(res.token)
         })
         .error(function (err) {
