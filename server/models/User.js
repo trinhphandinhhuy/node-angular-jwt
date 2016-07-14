@@ -1,10 +1,18 @@
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var UserSchema = new mongoose.Schema({
-    email: String,
+    email: {
+        type: String,
+        require: true,
+        unique: true,
+        index: true
+    },
     password: String
 });
+
+UserSchema.plugin(uniqueValidator);
 
 //function to hide password when server return result to client using JSON
 UserSchema.methods.toJSON = function () {

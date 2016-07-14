@@ -1,18 +1,13 @@
 'use strict';
 
 angular.module('jwtPluralsightApp')
-  .controller('LoginCtrl', function ($http, API_URL, alert, authToken) {
+  .controller('LoginCtrl', function ($http, alert, auth) {
     var vm = this;
     vm.submit = function () {
-      var url = API_URL + 'login';
-      var user = {
-        email: vm.email,
-        password: vm.password
-      };
-      $http.post(url, user)
+      
+      auth.login(vm.email, vm.password)
         .success(function (res) { 
-          alert('success', 'Welcome', 'Thanks for coming back ' + res.user.email + '!');
-          authToken.setToken(res.token)
+          alert('success', 'Welcome', 'Thanks for coming back ' + res.user.email + '!');          
         })
         .error(function (err) {
           alert('warning', 'Something went wrong', err.message);
